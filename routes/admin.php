@@ -2,14 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\PaymentController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AuthController::class, 'index'])->name('login'); // Updated to use a single method for both login and dashboard
+    Route::get('/', [AuthController::class, 'index'])->name('login'); // Admin login route
     Route::post('/', [AuthController::class, 'login'])->name('login.submit');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Admin dashboard routes
-    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::middleware(['auth:admin', 'role:admin'])->group(function () {
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
         // Users

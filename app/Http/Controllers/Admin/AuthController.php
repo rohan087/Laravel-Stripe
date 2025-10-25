@@ -13,11 +13,11 @@ class AuthController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && Auth::user()->hasRole('admin')) {
-            return redirect()->route('admin.dashboard'); // Redirect to dashboard if logged in
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
         }
 
-        return view('admin.auth.login'); // Show login form if not authenticated
+        return view('admin.auth.login');
     }
 
     /**

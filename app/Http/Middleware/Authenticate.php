@@ -11,7 +11,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request): ?string
     {
-        dd($request->path());
         if (!$request->expectsJson()) {
             // Redirect to admin login if the request is for admin routes
             if ($request->is('admin/*')) {
@@ -24,7 +23,7 @@ class Authenticate extends Middleware
             }
 
             // Default redirect for other routes
-            return route('home'); // Ensure this route exists or handle it appropriately
+            return route('home'); // Ensure this route exists
         }
     }
 }
