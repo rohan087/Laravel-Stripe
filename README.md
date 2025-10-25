@@ -59,3 +59,69 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Laravel Stripe Integration Demo
+
+This project is a demonstration of integrating the Stripe payment gateway into a Laravel application. It showcases our understanding of Laravel's framework and its capabilities in handling payment processing using Stripe.
+
+## Features
+- **Stripe Integration**: Seamless integration with Stripe for payment processing.
+- **Payment Flows**: Includes examples of creating charges, managing subscriptions, and handling webhooks.
+- **Laravel Best Practices**: Follows Laravel conventions for controllers, services, models, and views.
+- **Secure Configuration**: Uses environment variables for sensitive Stripe keys.
+
+## Getting Started
+
+### Prerequisites
+- PHP 8.x
+- Composer
+- Node.js and npm
+- MySQL
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/laravel-stripe.git
+   cd laravel-stripe
+   ```
+
+2. Install dependencies:
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. Set up the `.env` file:
+   ```bash
+   cp .env.example .env
+   ```
+   Update the following values in `.env`:
+   ```
+   APP_URL=http://laravel-stripe.test
+   DB_CONNECTION=mysql
+   DB_DATABASE=laravel-stripe
+   STRIPE_SECRET_KEY=your_secret_key
+   STRIPE_PUBLIC_KEY=your_public_key
+   ```
+
+4. Run migrations:
+   ```bash
+   php artisan migrate
+   ```
+
+5. Serve the application:
+   ```bash
+   php artisan serve
+   ```
+
+### Testing
+Run the test suite using:
+```bash
+php artisan test
+```
+
+## Learn More
+- [Laravel Documentation](https://laravel.com/docs)
+- [Stripe API Documentation](https://stripe.com/docs/api)
+
+This project is intended for educational purposes and to demonstrate the integration of Laravel with Stripe. Contributions and feedback are welcome!
