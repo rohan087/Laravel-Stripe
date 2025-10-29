@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Invoice;
 use App\Models\Setting;
+use App\Models\PaymentMethod;
 
 class InvoiceController extends Controller
 {
@@ -48,6 +49,21 @@ class InvoiceController extends Controller
             $payAll = true;
         }
         $total = $invoices->sum('amount');
-        return view('user.invoices.pay', compact('invoices', 'total', 'surchargePercent', 'payAll'));
+
+        // Fetch saved payment methods for the user
+        $savedPaymentMethods = PaymentMethod::where('user_id', $user->id)->get()->map(function ($method) {
+            return [
+                'id' => $method->id,
+                'type' => $method->type,
+                'brand' => $method->brand,
+                'last4' => $method->last4,
+                'bank_name' => $method->bank_name,
+            ];
+        });
+
+        // Pass Stripe public key to the view
+        $stripePublicKey = config('services.stripe.key');
+
+        return view('user.invoices.pay', compact('invoices', 'total', 'surchargePercent', 'payAll', 'savedPaymentMethods', 'stripePublicKey'));
     }
 }
